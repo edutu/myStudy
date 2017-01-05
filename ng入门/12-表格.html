@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+table, th , td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+</head>
+<body ng-app="myApp">
+	<!-- 
+    	ng-repeat 指令可以完美的显示表格
+    	$index 重复元素的下标
+
+    	ng-if 判断指令
+    	$even $odd 返回值是bool
+    -->
+	<div ng-controller="myCtrl">
+		<table>
+			<tr ng-repeat="x in person | orderBy:'age'">
+				<td>{{$index+1}}</td>
+				<td>{{x.name}}</td>
+				<td>{{x.age}}</td>
+			</tr>
+		</table>
+		<table>
+			<tr ng-repeat="x in person2">
+				<td ng-if="$even" style="background:red;">
+					{{x.name+$even}}
+				</td>
+				<td ng-if="$odd" style="background:green;">
+					{{x.name+$odd}}
+				</td>
+				<td ng-if="$even" style="background:red;">
+					{{x.age}}
+				</td>
+				<td ng-if="$odd" style="background:green;">
+					{{x.age}}
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script src="js/1.6/angular.js"></script>
+	<script>
+	var app = angular.module("myApp",[]);
+	app.controller("myCtrl",function($scope){
+		$scope.person = [
+			{name:"张三",age:12},
+			{name:"李四",age:32},
+			{name:"王五",age:2}
+		];
+		$scope.person2 = [
+			{name:"张三",age:12},
+			{name:"李四",age:32},
+			{name:"王五",age:2},
+			{name:"zhangsan",age:7},
+			{name:"lisi",age:2},
+			{name:"wamgwu",age:87}
+		];
+	})
+	</script>
+</body>
+</html>

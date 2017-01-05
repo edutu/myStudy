@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/1.6/angular.js"></script>
+</head>
+<body ng-app="">
+	<!--
+		在ng中我们可以使用ng-include指令来包含html内容
+		两点要注意：1.ng-clude使用了ajax请求，要在web环境打开，否则报错
+					2.apart.htm 要加引号
+	-->
+	<div>
+		<div ng-include="'apart.htm'"></div>
+	</div>
+	<script></script>
+</body>
+</html>

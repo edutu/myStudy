@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="">
+	<!--
+		注意：在没有相应程序之前，ng-app不要起名、ng-controller不要写
+	-->
+
+	<!--
+		ng有一些绑定到元素属性的指令
+		ng-disabled
+		ng-show
+		ng-hide
+	-->
+	<div ng-init="mySwitch=true">
+		<button ng-disabled="mySwitch">点我！</button>
+		<input type="checkbox" ng-model="mySwitch">
+		{{mySwitch}}
+		<p ng-show="true">我是可见的</p>
+		<p ng-show="false">我不可见</p>
+	</div>
+	<script src="js/1.6/angular.js"></script>
+	<script></script>
+</body>
+</html>

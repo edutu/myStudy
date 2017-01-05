@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp">
+	<!--
+		ng控制器控制ng中的数据 它是js对象
+		AngularJS 应用程序由 ng-app 定义
+		ng-controller="myCtrl" 属性是一个 AngularJS 指令。用于定义一个控制器。
+		控制器可以有属性和方法
+		通常把控制器放在外部文件中
+	-->
+	<div ng-controller="myCtrl">
+		<input type="text" ng-model="firstname">
+		<input type="text" ng-model="lastname">
+		<p>名字是：{{firstname + lastname}}</p>
+		<p>全名：{{fullname()}}</p>
+	</div>
+	<script src="js/1.6/angular.js"></script>
+	<script src="controller/controller.js"></script>
+	<script>
+	
+	
+	</script>
+</body>
+</html>

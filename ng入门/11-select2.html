@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp">
+	
+	<div ng-controller="myCtrl">
+		<!--
+			ng-option使用对象有很大不同
+			当以对象为数据源时，选择的值是key-value中的value
+			value在key-value中也可以是对象
+		-->
+		<select name="" id="" ng-model="selectedSite" ng-options="x for (x,y) in sites">
+			
+		</select>
+		<h2>{{selectedSite}}</h2>
+	</div>
+	<script src="js/1.6/angular.js"></script>
+	<script>
+	var app = angular.module("myApp",[]);
+	app.controller("myCtrl",function($scope){
+		$scope.sites = {
+			site01:"Google",
+			site02:"Runoob",
+			site03:"Taobao"
+		}
+	})
+	</script>
+</body>
+</html>

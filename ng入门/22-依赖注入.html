@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/1.6/angular.js"></script>
+</head>
+<body ng-app="myApp">
+	<!--
+		Dependency Injection 是一种设计模式，在这种模式下，一个或更多的依赖或服务被注入到一个独立的对象（或客户端）中，然后成为该客户端状态的一部分。该模式分离了客户端依赖本事行为的创建，使得程序变得松耦合，并遵循了依赖反转和单一职责原则。
+
+		ng 的五个核心组件作为依赖注入
+			value
+			factory
+			service
+			provider
+			constant
+
+		service,factory,provider三者的区别：从底层上来讲service调用了factory，factory调用了provider，
+		都是对provider的封装。factory返回一个有属性有方法的对象，相当于var，不需要处理复杂逻辑时用factory；service相当于new一个对象，功能控制较多时用service，
+		只有provider能传入到config函数中。
+	-->
+	<div ng-controller="myCtrl">
+		<h2>Angularjs 的简单应用</h2>
+		<p>输入一个数字 <input type="number" ng-model="number"></p>
+		<button ng-click="square()">X<sup>2</sup></button>
+		<p>结果：{{result}}</p>
+	</div>
+	
+	<script>
+	var app = angular.module("myApp",[]);
+	app.config(function($provide){
+		$provide.provider("MathService",function(){
+			this.$get = function(){
+				var factory = {};
+				factory.multiply = function(a,b){
+					return a*b;
+				}
+				return factory;
+			}
+		})
+	})
+	app.value("defaultInput",5);
+	app.factory("MathService",function(){
+		var factory = {};
+		factory.multiply = function(a,b){
+			return a*b;
+		}
+		return factory;
+	})
+	app.service("CalcService",function(MathService){
+		this.square = function(a){
+			return MathService.multiply(a,a);
+		}
+	})
+	app.controller("myCtrl",function($scope,CalcService,defaultInput){
+		$scope.number = defaultInput;
+		$scope.result = CalcService.square($scope.number);
+		$scope.square = function(){
+			$scope.result = CalcService.square($scope.number);
+		}
+	})
+	</script>
+</body>
+</html>

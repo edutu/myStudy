@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/1.6/angular.js"></script>
+</head>
+<body ng-app="myApp">
+
+	<div ng-controller="myCtrl">
+		<h2>My Note</h2>
+		<textarea name="" id="" cols="10" rows="10" ng-model="txt"></textarea>
+		<button ng-click="save()">save</button>
+		<button ng-click="clear()">clear</button>{{txt}}
+		<p>remaining words <span>{{left()}}</span></p>
+	</div>
+	
+	<script>
+	var app = angular.module("myApp",[]);
+	app.controller("myCtrl",function($scope){
+		$scope.txt = "";
+		$scope.save = function(){
+			console.log(1)
+			alert("saved");
+		}
+		$scope.clear = function(){
+			console.log(2)
+			$scope.txt = "";
+		}
+		$scope.left = function(){ //在渲染两次页面的过程中，只有相关函数会被执行（两次）
+			console.log(3)
+			return 100 - $scope.txt.length;
+		};
+		console.log(000) //这个位置只执行一次
+	})
+	</script>
+</body>
+</html>

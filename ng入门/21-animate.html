@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/1.6/angular.js"></script>
+	<script src="js/1.6/angular-animate.js"></script>
+	<style>
+	div{
+		height:100px;
+		width:100%;
+		background: lightblue;
+		transition:all 0.6s;
+		position: relative;
+		top:0;
+		left: 0;
+	}
+	.ng-hide{
+		height:0;
+		width:0;
+		top:-100px;
+		left:100px;
+		background: transparent;
+	}
+	.aa{
+		height:0;
+		width:0;
+		top:-100px;
+		left:100px;
+		background: transparent;
+	}
+	</style>
+</head>
+<body ng-app="myApp">
+
+		<!--
+			ngAnimate 可以添加和移除类名，并且产生动画，
+			注意：要添加 ngAnimate 模型
+			和普通的添加移除类名并不相同，如果不加，不会产生动画。
+		-->
+		<h1>隐藏DIV：<input type="checkbox" ng-model="myCheck">
+			<input type="button" id="btn" value="click">
+		</h1>
+		<div ng-hide="myCheck" id="box"></div>
+
+	
+	<script>
+	var app = angular.module("myApp",['ngAnimate']);
+	var oDiv = document.getElementById('box');
+	var oBtn = document.getElementById("btn");
+	oBtn.onclick = function(){
+		oDiv.setAttribute('class','aa');
+	}
+	</script>
+</body>
+</html>

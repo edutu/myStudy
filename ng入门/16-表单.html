@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/1.6/angular.js"></script>
+</head>
+<body ng-app="myApp">
+	<!--
+		novalidate 属性是在 HTML5 中新增的。禁用了使用浏览器的默认验证。
+		angular.copy() 复制对象
+	-->
+	<div ng-controller="myCtrl">
+		<form action="" novalidate>
+			<input type="text" ng-model="user.firstname">
+			<input type="text" ng-model="user.lastname">
+			<button ng-click="reset()">重置</button>
+			<p>user = {{user}}</p>
+			<p>master = {{master}}</p>
+		</form>
+	</div>
+	
+	<script>
+	var app = angular.module("myApp",[]);
+	app.controller("myCtrl",function($scope){
+		$scope.master = {
+			firstname:"Join",
+			lastname:"Ben"
+		}
+		$scope.reset = function(){
+			$scope.user = angular.copy($scope.master);
+		}
+		$scope.reset();
+	})
+	</script>
+</body>
+</html>

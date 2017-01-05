@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp">
+	<!--
+		angularjs 指令是拓展的html属性 有ng-前缀
+		ng-app 初始化angularjs程序 一个网页只能有一个
+		ng-init 初始化数据
+		ng-model 将元素值绑定到应用程序
+		ng中的数据绑定，同步了ng的表达式和ng的数据
+
+		ng-repeat 重复html元素
+	-->
+	<div ng-init="firstname='hao'"></div>
+	<input type="text" ng-model="firstname">
+	<div ng-app>{{firstname}}</div>
+	<div ng-init="quantity=1;cost=5">
+		<input type="text" ng-model="quantity">
+		<input type="text" ng-model="cost">
+		<br>
+		<p>{{quantity*cost}}</p>
+	</div>
+	<div ng-init="names=['hao','boluo','mianbao']">
+		<ul>
+			<li ng-repeat="x in names">
+				{{x}}
+			</li>
+		</ul>
+	</div>
+	<div ng-init="names2=[
+	{name:'hao',age:12},
+	{name:'boluo',age:99}
+	]">
+		<ul>
+			<li ng-repeat="x in names2">
+				{{x.name+","+x.age}}
+			</li>
+		</ul>
+	</div>
+	<!--
+		自定义指令 用驼峰法命名一个指令 但使用时用“-”分割
+		调用指令的四种方式：
+			元素名 E
+			属性 A
+			类名 C
+			注释 M (comment)
+		通过restrict属性设置指令调用方式 默认EA
+	-->
+	<runoob-directive></runoob-directive>
+	<div runoob-directive></div>
+	<div class="runoob-directive"></div>
+	<!-- directive: runoob-directive -->
+	<script src="js/1.6/angular.js"></script>
+	<script>
+	var app =angular.module("myApp",[]);
+	app.directive("runoobDirective",function(){
+		return {
+			template:"<h1>自定义指令</h1>",
+			restrict:"EACM",
+			replace:true // 使用注释指令时 要添加replace属性
+		}
+	})
+	</script>
+</body>
+</html>

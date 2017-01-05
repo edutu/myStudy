@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp">
+	<!--
+		ng-model 
+			将输入域的值与ng创建的变量绑定
+			双向绑定
+	-->
+	<div ng-controller="myCtrl">
+		<input type="text" ng-model="firstname">
+		<h3>名字是：{{firstname}}</h3>
+	</div>
+	<!--
+		验证用户输入
+		myForm.myEmail.$error.email 为空的时候与不合法的时候是false
+		输入正确为true
+
+		ng-model指令可以为数据提供状态值
+		（invalid dirty touched error）
+		valid可以判断有required时的合法性
+		但是error不判断required
+	-->
+	<form action="" name="myForm" ng-init="text='hao@123'">
+		<input type="email" name="myEmail" ng-model="text"
+		required>
+		<span ng-show="myForm.myEmail.$error.email">
+			输入错误
+		</span>
+		<h2>状态</h2>
+		<p>valid:{{myForm.myEmail.$valid}} 合法为true</p>
+		<p>dirty:{{myForm.myEmail.$dirty}} 变化为true</p>
+		<p>touched:{{myForm.myEmail.$touched}} 点击过为true</p>
+	</form>
+	<!--
+		ng-model指令基于他们的状态为html元素提供了css类
+			ng-empty
+			ng-not-empty
+			ng-touched
+			ng-untouched
+			ng-valid
+			ng-invalid
+			ng-pending 待定状态
+			ng-pristine	初始状态
+		ng1.3不支持
+	-->
+	<style>
+	/* 注意中间没有空格 */
+	.myEmail.ng-pending{
+		background: lightblue;
+	}
+	</style>
+	<input type="email" class="myEmail" ng-model="mytxt" required>
+	<script src="js/1.6/angular.js"></script>
+	<script>
+	var app = angular.module("myApp",[]);
+	app.controller("myCtrl",function($scope){
+		$scope.firstname = "hao";
+	})
+	</script>
+</body>
+</html>

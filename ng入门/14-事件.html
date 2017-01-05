@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp">
+	<!--
+		ng-click
+	-->
+	<div ng-controller="myCtrl">
+		<button ng-click="count = count +1">点击次数</button>
+		{{count}}
+		<button ng-click="toggle()">click</button>
+		<p ng-hide="btn">lalalalala</p>
+	</div>
+	<script src="js/1.6/angular.js"></script>
+	<script>
+	var app = angular.module("myApp",[]);
+	app.controller("myCtrl",function($scope){
+		$scope.count = 0;
+		$scope.btn = true;
+		$scope.toggle = function(){
+			$scope.btn = !$scope.btn;
+		}
+	})
+	</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app>
+	<!--
+		angularjs 表达式写在双大括号内 用来输出数据
+		可以包含 字符串、运算符、变量
+
+		类似于 JavaScript 表达式，AngularJS 表达式可以包含字母，操作符，变量。
+		与 JavaScript 表达式不同，AngularJS 表达式可以写在 HTML 中。
+		与 JavaScript 表达式不同，AngularJS 表达式不支持条件判断，循环及异常。
+		与 JavaScript 表达式不同，AngularJS 表达式支持过滤器。
+	-->
+	<div ng-init="quantity=1;cost=5">
+		<p>{{quantity*cost}}</p>
+		<p ng-bind="quantity*cost"></p>
+	</div>
+	<div ng-init="firstname='hao';lastname='123'">
+		<p>姓名：<span ng-bind="firstname+' '+lastname"></span></p>
+	</div>
+	<div ng-init="person={firstname:'hao',lastname:'123'}">
+		<p>姓：<span ng-bind="person.firstname"></span></p>
+	</div>
+	<div ng-init="arr=[1,2,3,4]">
+		<p>第二个值为：<span ng-bind="arr[1]"></span></p>
+	</div>
+	<script src="js/angular.js"></script>
+</body>
+</html>

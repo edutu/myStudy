@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp">
+	<!--
+		使用ng-options创建选择框
+		也可以使用ng-repeat
+		使用ng-options更好 因为他选中的是对象，而ng-repeat选择中的是字符串
+
+		注意：数据源是数组与对象的两种情况
+	-->
+	<div ng-controller="myCtrl">
+		<select name="" id="" ng-model="selectedName" ng-options="x for x in names"></select>
+		<select name="" id="">
+			<option value="" ng-repeat="x in names">{{x}}</option>
+		</select>
+		<hr>
+		<select name="" id="" ng-model="selectedSite">
+			<!-- 这里注意value没有解析表达式的能力要加{{}} -->
+			<option value="{{x.url}}" ng-repeat="x in sites">{{x.site}}</option>
+		</select>
+		<h2>选择的值是：{{selectedSite}}</h2>
+		<!-- ng-options 选择的值是对象 -->
+		<select name="" id="" ng-model="selectedSite2" ng-options="x.site for x in sites"></select>
+		<h2>选择的是：{{selectedSite2.site}}</h2>
+		<p>网址为:{{selectedSite2.url}}</p>
+	</div>
+	<script src="js/1.6/angular.js"></script>
+	<script>
+	var app = angular.module("myApp",[]);
+	app.controller('myCtrl',function($scope){
+		$scope.names = ['hao','123','baidu'];
+		$scope.sites = [
+		    {site : "Google", url : "http://www.google.com"},
+		    {site : "Runoob", url : "http://www.runoob.com"},
+		    {site : "Taobao", url : "http://www.taobao.com"}
+		];
+	})
+	</script>
+</body>
+</html>

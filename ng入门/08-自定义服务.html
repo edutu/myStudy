@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp">
+	<!--
+		创建自定义服务后可以在控制器、指令、过滤器、或其他服务中使用它
+	-->
+	<div ng-controller="myCtrl">
+		{{hex}}
+		<ul>
+			<li ng-repeat="x in counts">
+				{{x | myFormat}}
+			</li>
+		</ul>
+	</div>
+	<script src="js/1.6/angular.js"></script>
+	<script>
+	var app = angular.module("myApp",[]);
+	app.service("hexafy",function(){
+		this.myFun = function(x){
+			return x.toString(16);
+		}
+	});
+	app.controller("myCtrl",function($scope,hexafy){
+		$scope.hex = hexafy.myFun(255);
+		$scope.counts = [155,255,16];
+	})
+	//自定义过滤器
+	app.filter("myFormat",['hexafy',function(hexafy){
+		return function(x){
+			return hexafy.myFun(x);
+		}
+	}])
+	</script>
+</body>
+</html>

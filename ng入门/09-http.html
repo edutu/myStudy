@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp">
+	
+	<div ng-controller="myCtrl">
+		<ul>
+			<li ng-repeat="x in names">
+				{{x.Name + ',' + x.Country}}
+			</li>
+		</ul>
+	</div>
+	<script src="js/1.6/angular.js"></script>
+	<script>
+	var app = angular.module("myApp",[]);
+	app.controller('myCtrl',function($scope,$http){
+		 /* $http.get("http://www.runoob.com/try/angularjs/data/sites.php")
+  .success(function (response) {$scope.names = response.sites;});*/
+  //写法已经过时
+	})
+	</script>
+</body>
+</html>

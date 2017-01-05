@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-app="myApp">
+	<!--
+		服务是一个函数或者对象 在ng应用中使用
+		用服务先注入
+		有个 $location 服务，它可以返回当前页面的 URL 地址。
+		$http 是 AngularJS 应用中最常用的服务。 服务向服务器发送请求，应用响应服务器传送过来的数据。
+		$timeout 服务对应了 JS window.setTimeout 函数。
+		$interval 服务对应了 JS window.setInterval 函数。
+	-->
+	<div ng-controller="myCtrl">
+		{{myUrl}}
+
+	</div>
+	<script src="js/1.6/angular.js"></script>
+	<script src="controller/controller.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/1.6/angular.js"></script>
+</head>
+<body ng-app="myApp">
+	<!--
+		借此，我们可以实现多视图的单页面web应用（SPA）
+		 因为 # 号之后的内容在向服务端请求时会被浏览器忽略掉。 所以我们就需要在客户端实现 # 号后面内容的功能实现。 AngularJS 路由 就通过 # + 标记 帮助我们区分不同的逻辑页面并将不同的页面绑定到对应的控制器上。
+
+		 1.要注入ngRoute模块
+		 2.使用ng-view指令
+		 3.配置routeProvider 用一个when函数定义路由，两个对象（url，路由配置对象）
+		 $routeProvider.when(url, {
+		     template: string, //简单内容
+		     templateUrl: string, //html模板文件
+		     controller: string, function 或 array, //对应模板的控制器
+		     controllerAs: string, // 为controller取别名
+		     redirectTo: string, function, //重定向
+		     resolve: object<key, function> //指定当前controller所依赖的其他模块。
+		 });
+	-->
+	<div ng-controller="myCtrl"></div>
+	
+	<script src="controller/controller.js"></script>
+</body>
+</html>
