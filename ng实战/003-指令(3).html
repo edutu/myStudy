@@ -9,7 +9,7 @@
 	<!--
 		指令和控制器的交互
 
-		link(scope,element,attr)
+		link(scope,element,attrs)
 		scope 相当于$scope
 		elememt 该元素
 		attr 该元素属性的集合
@@ -41,11 +41,11 @@
 	app.directive("loader",function(){
 		return {
 			restrct: "AE",
-			link:function(scope,element,attr){
+			link:function(scope,element,attrs){
 				element.bind("mouseenter",function(){ //绑定事件 on也行
 					//scope.loadData();
 					//scope.$apply("loadData()");
-					scope.$apply(attr.howtoload); // js中驼峰写法换成小写
+					scope.$apply(attrs.howtoload); // js中驼峰写法换成小写
 				})
 			}
 		}

@@ -8,9 +8,12 @@
 <body ng-app="myApp">
 	<!--
 		directive 中 scope 绑定策略
-			@ 将当前属性作为字符串传递
-			= 与父scope中的属性进行双向绑定
+		注意三者的写法，与传递的内容
+			@ 将当前属性作为字符串传递 注意，传递的值加{{}}
+			= 与父scope中的属性进行双向绑定 不用加{{}}
 			& 传递一个来自父scope的函数
+
+			directive中的@代表字面量（基本类型的常量），＝代表变量（父scope上的一个变量），&代表事件（父scope上的一个事件），如果想详细了解可以看看双狼的angular新书。谢谢！
 	-->
 	<div ng-controller="myCtrl">
 		<drink flavor={{myFlavor}}></drink>
@@ -20,12 +23,15 @@
 	var app = angular.module("myApp",[]);
 	app.directive("drink",function(){
 		return {
+			scope: {
+				flavor: "@" // 将属性传递过来
+			},
 			template: "<div>{{flavor}}</div>", // 添加的是里面的内容
 			//replace: true, //代替的是指令 
-			link: function(scope,element,attrs){
+			/*link: function(scope,element,attrs){
 				//第一个flavor是div内的变量flavor，第二个是drink中属性flavor
 				scope.flavor = attrs.flavor; 
-			}
+			}*/
 		}
 	})
 	app.controller("myCtrl",function($scope){
