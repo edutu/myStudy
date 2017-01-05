@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/1.6/angular.js"></script>
+</head>
+<body ng-app="myApp">
+	<!--
+		指令和控制器的交互
+
+		link(scope,element,attr)
+		scope 相当于$scope
+		elememt 该元素
+		attr 该元素属性的集合
+		$apply
+	-->
+	<div ng-controller="myCtrl">
+		<h2>
+			<loader howToLoad="loadData()">加载数据....</loader>
+		</h2>
+	</div>
+	<div ng-controller="myCtrl2">
+		<h2>
+			<loader howToLoad="loadData2()">加载数据....222</loader>
+		</h2>
+	</div>
+	
+	<script>
+	var app = angular.module("myApp",[]);
+	app.controller("myCtrl",function($scope){
+		$scope.loadData = function(){
+			console.log("加载数据....111");
+		}
+	})
+	app.controller("myCtrl2",function($scope){
+		$scope.loadData2 = function(){
+			console.log("加载数据....222");
+		}
+	})
+	app.directive("loader",function(){
+		return {
+			restrct: "AE",
+			link:function(scope,element,attr){
+				element.bind("mouseenter",function(){ //绑定事件 on也行
+					//scope.loadData();
+					//scope.$apply("loadData()");
+					scope.$apply(attr.howtoload); // js中驼峰写法换成小写
+				})
+			}
+		}
+	})
+	</script>
+</body>
+</html>

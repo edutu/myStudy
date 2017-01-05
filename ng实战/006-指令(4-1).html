@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/1.6/angular.js"></script>
+</head>
+<body ng-app="myApp">
+
+	<div ng-controller="myCtrl">
+		<drink>hao</drink>
+	</div>
+	
+	<script>
+	var app = angular.module("myApp",[]);
+	app.directive("drink",function(){
+		return {
+			//template: "<div>hao</div>"
+		}
+	})
+	app.controller("myCtrl",function(){
+		
+	})
+	</script>
+</body>
+</html>

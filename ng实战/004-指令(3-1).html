@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/1.3/angular.js"></script>
+</head>
+<body ng-app="myApp">
+	<!--
+		超人例子
+		ng 内部内置了jquerylight 简化版的jq
+		scope
+		require
+	-->
+	<div ng-controller="myCtrl">
+		<superman strength>strength</superman>
+		<superman strength speed>strength speed</superman>
+		<superman strength speed light>strength speed light</superman>
+	</div>
+	
+	<script>
+	var app = angular.module("myApp",[]);
+	app.directive("superman",function(){
+		return {
+			restrict: "AE",
+			scope: {}, // 创建独立作用域
+			controller: function($scope){ // 指令内部的controller 用来给指令暴露出一组方法给外部使用
+				$scope.abilities = [];
+				this.addStrength = function(){
+					$scope.abilities.push("strength");
+				}
+				this.addSpeed = function(){
+					$scope.abilities.push("speed");
+				}
+				this.addLight = function(){
+					$scope.abilities.push("light");
+				}
+
+			},
+			link: function(scope,element,attrs){
+				element.addClass("btn btn-primary");
+				element.on("click",function(){
+					console.log(scope.abilities);
+				})
+			}
+		}
+	})
+	app.directive("strength",function(){
+		return {
+			require: "^superman", // 有了这个require，就可以传第四个参数，并调用所依赖的指令的函数
+			link: function(scope,element,attrs,supermanCtrl){
+				supermanCtrl.addStrength();
+			}
+		}
+	})
+	app.directive("speed",function(){
+		return {
+			require: "^superman",
+			link: function(scope,element,attrs,supermanCtrl){
+				supermanCtrl.addSpeed();
+			}
+		}
+	})
+	app.directive("light",function(){
+		return {
+			require: "^superman",
+			link: function(scope,element,attrs,supermanCtrl){
+				supermanCtrl.addLight();
+			}
+		}
+	})
+	app.controller("myCtrl",function(){
+		
+	})
+	</script>
+</body>
+</html>

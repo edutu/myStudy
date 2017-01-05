@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/1.6/angular.js"></script>
+</head>
+<body ng-app="myApp">
+	<!--
+		restrict (EACM)常用EA
+		template 少量模板代码
+		templateUrl 大量代码
+		$templateCache 模板缓存使之能运用于多个指令中 算是template的延伸
+
+		replace 和 transclude
+		注释指令时要加replace
+
+		compile 了解即可
+		link DOM操作
+
+		指令的三个阶段：
+			加载阶段 找 ng-app
+			编译阶段 根据restrict等compile变换DOM
+			链接阶段 link
+	-->
+	<div ng-controller="myCtrl">
+		<hello>
+			<div>somesome</div>
+		</hello>
+	</div>
+	
+	<script>
+	var app = angular.module("myApp",[]);
+	//run 所有模块加载完成后，这个方法会被执行一次
+	app.run(function($templateCache){
+		$templateCache.put("hello","<div>Hello AngularJs</div>");
+	})
+	app.directive("hello",function($templateCache){
+		return {
+			restrict: "AECM",
+			//template: "<div>Hello AngularJs</div>",
+			//templateUrl: "hello.html" // 这里要么有服务器环境，要么用火狐，就不报错了
+			template: $templateCache.get("hello")+"<div ng-transclude></div>",
+			transclude:true, // 使嵌套内容不被替代
+		}
+	})
+	app.controller("myCtrl",function(){
+		
+	})
+	</script>
+</body>
+</html>
