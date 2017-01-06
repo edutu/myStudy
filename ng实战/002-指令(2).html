@@ -24,7 +24,7 @@
 			链接阶段 link
 	-->
 	<div ng-controller="myCtrl">
-		<hello>
+		<hello class>
 			<div>somesome</div>
 		</hello>
 	</div>
@@ -33,15 +33,16 @@
 	var app = angular.module("myApp",[]);
 	//run 所有模块加载完成后，这个方法会被执行一次
 	app.run(function($templateCache){
-		$templateCache.put("hello","<div>Hello AngularJs</div>");
+		$templateCache.put("hello1","<div>Hello AngularJs</div>");
 	})
 	app.directive("hello",function($templateCache){
 		return {
 			restrict: "AECM",
 			//template: "<div>Hello AngularJs</div>",
 			//templateUrl: "hello.html" // 这里要么有服务器环境，要么用火狐，就不报错了
-			template: $templateCache.get("hello")+"<div ng-transclude></div>",
+			template: $templateCache.get("hello1")+"<div ng-transclude></div>",
 			transclude:true, // 使嵌套内容不被替代
+			replace: true
 		}
 	})
 	app.controller("myCtrl",function(){

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/1.6/angular.js"></script>
+	<script>
+		console.log("top")
+	</script>
+</head>
+<body ng-app="myApp">
+	<!--
+		accordion 手风琴
+		expander 拓展器
+
+		页面加载时渲染顺序:根据在不同位置输出的不同内容，可以发现，页面进行了两次渲染，第二次渲染遍历DOM，找出指令，执行compile，但不会执行指令中的controller，然后执行link。
+	-->
+	<div ng-controller="myCtrl">
+		<accordion>
+			<expander class="expander" ng-repeat="expander in expanders" expander-title='expander.title'>
+				{{expander.text}}
+			</expander>
+		</accordion>
+	</div>
+	
+	<script>
+	var app = angular.module("myApp",[]);
+	app.controller("myCtrl",function($scope) {
+		console.log(1)
+		$scope.expanders = [
+			{
+				title : 'click1',
+				text : '111111'
+			},
+			{
+				title : 'click2',
+				text : '222222'
+			},
+			{
+				title : 'click3',
+				text : '333333'
+			},
+		]
+	})
+	app.directive("accordion",function(){
+		console.log(3)
+		return {
+			restrict : "AE",
+			replace : true,
+			transclude : true,
+			template : '<div ng-transclude></div>',
+			controller : function() { // controller里面不调用不进去
+				var expanders = []; // 这个expanders和controller中的不一样，他存放的是scope，scope是执行环境也可以作为区分元素的标志
+				this.gotOpened = function(selectedExpander) {
+					angular.forEach(expanders,function(expander) {  // 对scope进行遍历
+						if (selectedExpander != expander) {
+							expander.showMe = false;
+						}
+					})
+				}
+				this.addExpander = function(expander) {
+					expanders.push(expander);
+				}
+			}
+		}
+	})
+	app.directive("expander",function() {
+		console.log(2)
+		return {
+			restrict : "EA",
+			replace : true,
+			require : "^?accordion",
+			transclude : true,
+			scope : {
+				title : '=expanderTitle'
+			},
+			template : '<div>'
+						+ '<div class="title" ng-click="toggle()">{{title}}</div>'
+						+ '<div class="body" ng-show="showMe" ng-transclude></div>'
+						+ '</div>',
+			link : function(scope,element,attrs,accordionController) {
+				scope.showMe = false;
+				accordionController.addExpander(scope);
+				console.log(scope)
+				console.log(element)
+				scope.toggle = function () {
+					scope.showMe = !scope.showMe;
+					accordionController.gotOpened(scope);
+				}
+			}
+		}
+	})
+
+	</script>
+</body>
+	<script>
+		console.log("bottom")
+	</script>
+</html>
